@@ -26,9 +26,9 @@ for y in range(len(grid)):
   count = 0
   for x in range(len(grid[y])):
     if grid[y][x] == 0:
+      if count > max:
+        max = count
       count = 0
     if grid[y][x] == 1:
       count += 1
-
-  print(count)
 print(max)
