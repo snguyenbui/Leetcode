@@ -26,16 +26,25 @@ const maxArea = function (h, w, horizontalCuts, verticalCuts) {
   horizontalCuts.sort((a, b) => a - b);
   verticalCuts.sort((a, b) => a - b);
   horizontalCuts.unshift(0);
-  horizontalCuts.push(h);
   verticalCuts.unshift(0);
+  horizontalCuts.push(h);
   verticalCuts.push(w);
-  let maxArea = 0;
-  for (let height in horizontalCuts) {
-    for (let width in verticalCuts) {
-      console.log(horizontalCuts[height]);
-      console.log(verticalCuts[width]);
-    }
-  }
+  let maximumArea = 0;
+  horizontalCuts.forEach((elemH, horizontalIndex) => {
+    verticalCuts.forEach((elemV, verticalIndex) => {
+      let area =
+        (horizontalCuts[horizontalIndex + 1] -
+          horizontalCuts[horizontalIndex]) *
+        (verticalCuts[verticalIndex + 1] - verticalCuts[verticalIndex]);
+      if (area > maximumArea) {
+        maximumArea = area;
+      }
+    });
+  });
+  return maximumArea % (10 ** 9 + 7);
 };
-
-maxArea(5, 4, [1, 2, 4], [1, 3]);
+// % 10 ** 9
+// console.log(maxArea(5, 4, [1, 2, 4], [1, 3]));
+// console.log(maxArea(5, 4, [3, 1], [1]));
+// console.log(maxArea(5, 4, [3], [3]));
+console.log(maxArea(1000000000, 1000000000, [2], [2]));
